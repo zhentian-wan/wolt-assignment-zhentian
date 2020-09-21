@@ -1,4 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+
 .App {
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: center;
+}
+
+.timeLogo {
+  color: grey;
 }

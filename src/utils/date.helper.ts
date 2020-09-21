@@ -29,12 +29,8 @@ export const prettyTime = (
   second: number,
   printTimeFn: PrintTimeFuntion = print12DigitsShortTime
 ) => {
-  if (second === MAX_TIME) {
-    return printTimeFn("12", "00", "PM");
-  }
-
   if (second === MIN_TIME) {
-    return printTimeFn("00", "00", "AM");
+    return printTimeFn("12", "00", "AM");
   }
 
   if (second < MIN_TIME || second > MAX_TIME) {

@@ -80,5 +80,4 @@ export const isCloseOnSameDay = (
 
 export const printTime = (time: number, printTimeFn?: PrintTimeFuntion) =>
   prettyTime(time, printTimeFn || print12DigitsShortTime);
-
 // #endregion

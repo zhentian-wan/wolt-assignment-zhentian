@@ -21,7 +21,7 @@ describe("Utils functions", () => {
 
   test("prettyDate", () => {
     const datas = [32400, 37800, 86399, 0];
-    const formatted = ["9 AM", "10:30 AM", "12 PM", "0 AM"];
+    const formatted = ["9 AM", "10:30 AM", "11:59 PM", "12 AM"];
     datas.forEach((d, i) => {
       const res = printTime(d);
       const expected = formatted[i];
