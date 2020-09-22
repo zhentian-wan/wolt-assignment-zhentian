@@ -36,4 +36,8 @@ SecondaryText.propTypes = {
   children: PropTypes.node
 };
 
+export const Capitalize = styled(Text)({
+  textTransform: "capitalize"
+});
+
 export default Text;

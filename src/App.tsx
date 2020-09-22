@@ -1,15 +1,17 @@
 import * as React from "react";
 import "./styles.css";
 import TimeTable from "./components/TimeTable";
+import { transform } from "./components/TimeTable.model";
 import { getTimeTable } from "./data";
 
 export default function App() {
-  const [timeTable, setTimeTable] = React.useState();
+  const [timeTable, setTimeTable] = React.useState([]);
 
   React.useEffect(() => {
     async function loadData() {
-      const data = await getTimeTable();
-      setTimeTable(data);
+      const rawData = await getTimeTable();
+      const formattedData = transform(rawData);
+      setTimeTable(formattedData);
     }
     loadData();
 

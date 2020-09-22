@@ -2,18 +2,31 @@ import React from "react";
 import { ReactComponent as TimeIcon } from "./query.svg";
 import Box from "./Box";
 import Divider from "./Divider";
-import { Row } from "./Flex";
-import Text, { HighlighedText, SecondaryText } from "./Text";
+import { Row, Column } from "./Flex";
+import Text, { HighlighedText, SecondaryText, Capitalize } from "./Text";
 import Heading from "./Heading";
 
-const TimeTableRow = (porps) => (
+import { isNotOperating } from "./TimeTable.model";
+import { isSameWeekDay } from "../utils/date.helper";
+
+const TimeTableRow = ({ day, times }) => (
   <>
     <Row justifyContent="space-between">
       <Box>
-        <Text>Monday</Text>
-        <HighlighedText mx={2}>TODAY</HighlighedText>
+        <Capitalize>{day}</Capitalize>
+        {isSameWeekDay(day) ? (
+          <HighlighedText mx={2}>TODAY</HighlighedText>
+        ) : null}
       </Box>
-      <SecondaryText>Closed</SecondaryText>
+      {isNotOperating(times) ? (
+        <SecondaryText>Closed</SecondaryText>
+      ) : (
+        <Column>
+          <Text py="2px">10 AM - 2 PM</Text>
+          <Text py="2px">10 AM - 2 PM</Text>
+          <Text py="2px">10 AM - 2 PM</Text>
+        </Column>
+      )}
     </Row>
     <Divider opacity="0.2" />
   </>
@@ -23,6 +36,7 @@ export default function TimeTable({ timeTable }) {
   return (
     <Box
       p="25px"
+      width="auto"
       minWidth="320px"
       maxWidth="320px"
       borderRadius="20px"
@@ -31,16 +45,17 @@ export default function TimeTable({ timeTable }) {
       role="table"
       aria-labelledby="timeTable__title"
     >
-      <Heading level={2} id="timeTable__title" alignItems="center">
+      <Heading level={2} id="timeTable__title">
         <TimeIcon fill="grey" alt="Opening hours" aria-hidden />
         <Text pl="10px">Opening hours</Text>
       </Heading>
       <Divider color="black" />
       <Box mt={3}>
-        {[1, 2, 3, 4, 5, 6, 7].map((item, index) => {
-          return <TimeTableRow key={item} />;
+        {timeTable.map(([day, times]) => {
+          return <TimeTableRow key={day} day={day} times={times} />;
         })}
       </Box>
+      <pre>{JSON.stringify(timeTable, null, 2)}</pre>
     </Box>
   );
 }
