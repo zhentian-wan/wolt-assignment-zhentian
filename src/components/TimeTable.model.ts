@@ -1,4 +1,4 @@
-import { head, pipe, last, propEq, toUpper, map, ifElse, toPairs } from "ramda";
+import { head, pipe, last, propEq, toPairs } from "ramda";
 import {
   prettyTime,
   print12DigitsShortTime,

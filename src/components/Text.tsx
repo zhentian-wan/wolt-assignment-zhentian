@@ -40,4 +40,8 @@ export const Capitalize = styled(Text)({
   textTransform: "capitalize"
 });
 
+Capitalize.propTypes = {
+  children: PropTypes.node
+};
+
 export default Text;
