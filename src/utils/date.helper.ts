@@ -14,7 +14,7 @@ export const getToday = (_date?: Date) => {
   const day = date.getDate();
   return new Date(year, month, day);
 };
-
+export const isToday = () => {};
 export const print12DigitsShortTime = (
   hour: string,
   minute: string,

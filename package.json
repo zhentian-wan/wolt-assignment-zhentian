@@ -9,6 +9,7 @@
   ],
   "main": "src/index.tsx",
   "dependencies": {
+    "@styled-system/prop-types": "5.1.5",
     "ramda": "0.27.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

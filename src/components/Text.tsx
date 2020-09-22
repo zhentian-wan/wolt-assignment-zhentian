@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const Text = styled.span(
   {
     margin: 0,
+    padding: 0,
     color: "black"
   },
   color,
@@ -14,6 +15,24 @@ const Text = styled.span(
 );
 
 Text.propTypes = {
+  children: PropTypes.node
+};
+
+export const HighlighedText = styled(Text)({
+  color: ({ theme }) => theme.colors.green,
+  fontSize: "10px",
+  fontWeight: "bold"
+});
+
+HighlighedText.propTypes = {
+  children: PropTypes.node
+};
+
+export const SecondaryText = styled(Text)({
+  color: ({ theme }) => theme.colors.grey3
+});
+
+SecondaryText.propTypes = {
   children: PropTypes.node
 };
 

@@ -1,14 +1,35 @@
 import styled from "styled-components";
-import { space, layout, color } from "styled-system";
+import {
+  space,
+  color,
+  border,
+  layout,
+  flexbox,
+  grid,
+  shadow
+} from "styled-system";
+import propTypes from "@styled-system/prop-types";
 
-const Box = styled("div")(
+const Box = styled.div(
   {
-    boxSizing: "border-box",
-    display: "inline-block"
+    boxSizing: "border-box"
   },
   space,
+  color,
+  border,
+  shadow,
   layout,
-  color
+  flexbox,
+  grid
 );
+
+Box.propTypes = {
+  ...propTypes.space,
+  ...propTypes.color,
+  ...propTypes.border,
+  ...propTypes.layout,
+  ...propTypes.flexbox,
+  ...propTypes.grid
+};
 
 export default Box;
