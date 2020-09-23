@@ -11,7 +11,7 @@ import theme from "../../theme";
 
 test("should render the table correctly", async () => {
   const formattedData = transform(defTimeTable);
-  const { getByText, getAllByTestId, container } = render(
+  const { getByText, getAllByText, getAllByTestId, container } = render(
     <ThemeProvider theme={theme}>
       <TimeTable timeTable={formattedData} />
     </ThemeProvider>
@@ -22,6 +22,7 @@ test("should render the table correctly", async () => {
   // body
   // should have Today mark
   expect(getByText(/today/i)).toBeInTheDocument();
+  expect(getAllByText(/today/i).length).toBe(1);
   // should have 7 rows
   const rows = getAllByTestId(/timetablerow-/i);
   expect(rows.length).toEqual(formattedData.length);
