@@ -1,4 +1,4 @@
-import { head, pipe, last, propEq, toPairs } from "ramda";
+import { head, pipe, last, propEq, toPairs, map, join, groupWith } from "ramda";
 import {
   prettyTime,
   print12DigitsShortTime,
@@ -28,7 +28,18 @@ export const isCloseOnSameDay = (
   const closeOnNextDay = isCloseHeadOfDay(nextDay);
   return !closeOnNextDay;
 };
-
+export const groupWithOpenCloseTimeInPair = (day: OpenCloseTime[]): boolean =>
+  groupWith(
+    (a: OpenCloseTime, b: OpenCloseTime) => isTypeOpen(a) && isTypeClose(b),
+    day
+  );
+export const printTimePeriodInPair = (day: OpenCloseTime[]) =>
+  join(
+    " - ",
+    map(({ value }) => printTime(value), day)
+  );
+export const printListOpenCloseTimeInPair = (times: OpenCloseTime[]) =>
+  pipe(groupWithOpenCloseTimeInPair, map(printTimePeriodInPair))(times);
 export const printTime = (time: number, printTimeFn?: PrintTimeFuntion) =>
   prettyTime(time, printTimeFn || print12DigitsShortTime);
 export const transform = (_data) => {

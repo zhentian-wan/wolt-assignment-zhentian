@@ -20,7 +20,7 @@ Text.propTypes = {
 
 export const HighlighedText = styled(Text)({
   color: ({ theme }) => theme.colors.green,
-  fontSize: "10px",
+  fontSize: "12px",
   fontWeight: "bold"
 });
 

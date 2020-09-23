@@ -32,8 +32,11 @@ export const print12DigitsShortTime = (
   minute: string,
   noon: string
 ) => {
+  if (hour === "00" && minute === "00" && noon === "pm") {
+    return "12 PM";
+  }
   const shortHour =
-    hour.startsWith("0") && (hour !== "00") ? hour.substr(1, 2) : hour;
+    hour.startsWith("0") && hour !== "00" ? hour.substr(1, 2) : hour;
   const shortMinute = minute === "00" ? "" : ":" + minute;
   return `${shortHour}${shortMinute} ${noon}`.toLocaleUpperCase();
 };
