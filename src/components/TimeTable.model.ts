@@ -35,7 +35,7 @@ export const isCloseOnSameDay = (
   [{type: open}, {type: close}]
 ]
 */
-export const groupWithOpenCloseTimeInPair = (day: OpenCloseTime[]): boolean =>
+export const groupWithOpenCloseTimeInPair = (day: OpenCloseTime[]) =>
   groupWith(
     (a: OpenCloseTime, b: OpenCloseTime) => isTypeOpen(a) && isTypeClose(b),
     day

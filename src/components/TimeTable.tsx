@@ -82,7 +82,7 @@ export const TimeTable: React.FC<TimeTableComponentProps> = memo(
           id="timeTable__title"
         >
           <TimeIcon fill="grey" alt="Opening hours" aria-hidden />
-          <Text fontSize="30px" pl="10px">
+          <Text fontSize={30} pl="10px">
             Opening hours
           </Text>
         </Heading>
