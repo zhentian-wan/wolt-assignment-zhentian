@@ -6,6 +6,15 @@ export type PrintTimeFuntion = (
 
 const MIN_TIME = 0;
 const MAX_TIME = 86399;
+export enum WeekDayMapping {
+  sunday = 0,
+  monday,
+  tuseday,
+  wednesday,
+  thrusday,
+  firday,
+  saturday
+}
 
 export const getToday = (_date?: Date) => {
   const date: Date = _date || new Date();
@@ -14,7 +23,10 @@ export const getToday = (_date?: Date) => {
   const day = date.getDate();
   return new Date(year, month, day);
 };
-export const isToday = () => {};
+export const isSameWeekDay = (day: string, _date?: Date) => {
+  const today = getToday(_date).getDay();
+  return WeekDayMapping[day] === today;
+};
 export const print12DigitsShortTime = (
   hour: string,
   minute: string,
