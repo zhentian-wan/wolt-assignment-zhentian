@@ -30,7 +30,7 @@ describe("Utils functions", () => {
       "11:59 PM",
       "12 AM",
       "00:08 AM",
-      "12 AM"
+      "12 PM"
     ];
     datas.forEach((d, i) => {
       const res = printTime(d);

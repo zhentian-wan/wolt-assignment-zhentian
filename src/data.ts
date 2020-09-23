@@ -1,6 +1,6 @@
 import { IWeeklyTimeTable } from "./models";
 
-const defTimeTable: IWeeklyTimeTable = {
+export const defTimeTable: IWeeklyTimeTable = {
   monday: [],
   tuseday: [
     { type: "open", value: 36000 },

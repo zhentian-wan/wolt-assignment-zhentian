@@ -92,7 +92,6 @@ export const TimeTable: React.FC<TimeTableComponentProps> = memo(
             return <TimeTableRow key={day} day={day} times={times} />;
           })}
         </Box>
-        <pre>{JSON.stringify(timeTable, null, 2)}</pre>
       </Box>
     );
   }
