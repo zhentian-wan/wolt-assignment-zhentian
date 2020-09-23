@@ -2,18 +2,20 @@ import styled from "styled-components";
 import Box from "./Box";
 
 const Flex = styled(Box)({
-  display: "flex"
+  display: "flex",
 });
 
-Flex.propTypes = Box.propTypes;
+Flex.propTypes = {
+  ...Box.propTypes,
+};
 
 export const Row = styled(Flex)({
-  flexDirection: "row"
+  flexDirection: "row",
 });
 Row.propTypes = Box.propTypes;
 
 export const Column = styled(Flex)({
-  flexDirection: "column"
+  flexDirection: "column",
 });
 Column.propTypes = Box.propTypes;
 

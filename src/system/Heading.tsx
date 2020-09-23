@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import styled from "styled-components";
 import { variant, space } from "styled-system";
@@ -11,10 +12,10 @@ const HeadingBase = ({ level, as: Component = `h${level}`, ...props }) => (
 const Heading = styled(HeadingBase)(
   {
     margin: 0,
-    color: ({ theme }) => theme.colors.black
+    color: ({ theme }) => theme.colors.black,
   },
   variant({
-    prop: "level"
+    prop: "level",
   }),
   space
 );
@@ -22,7 +23,7 @@ const Heading = styled(HeadingBase)(
 Heading.propTypes = {
   ...propTypes.space,
   level: PropTypes.oneOf([1, 2, 3]).isRequired,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default Heading;

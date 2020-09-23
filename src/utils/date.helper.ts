@@ -6,23 +6,31 @@ export type PrintTimeFuntion = (
 
 const MIN_TIME = 0;
 const MAX_TIME = 86399;
-export enum WeekDayMapping {
-  sunday = 0,
-  monday,
-  tuseday,
-  wednesday,
-  thrusday,
-  firday,
-  saturday
-}
+export type DayOfWeek =
+  | "monday"
+  | "tuseday"
+  | "wednesday"
+  | "thrusday"
+  | "firday"
+  | "saturday"
+  | "sunday";
+export const WeekDayMapping = {
+  sunday: 0,
+  monday: 1,
+  tuseday: 2,
+  wednesday: 3,
+  thrusday: 4,
+  firday: 5,
+  saturday: 6,
+};
 export const WeekDayNumberMapping = {
-  0: "sunday",
-  1: "monday",
-  2: "tuseday",
-  3: "wednesday",
-  4: "thrusday",
-  5: "firday",
-  6: "saturday"
+  "0": "sunday",
+  "1": "monday",
+  "2": "tuseday",
+  "3": "wednesday",
+  "4": "thrusday",
+  "5": "firday",
+  "6": "saturday",
 };
 
 export const getToday = (_date?: Date) => {
@@ -32,7 +40,7 @@ export const getToday = (_date?: Date) => {
   const day = date.getDate();
   return new Date(year, month, day);
 };
-export const isSameWeekDay = (day: string, _date?: Date) => {
+export const isSameWeekDay = (day: DayOfWeek, _date?: Date) => {
   const today = getToday(_date).getDay();
   return WeekDayMapping[day] === today;
 };
@@ -67,7 +75,7 @@ export const prettyTime = (
   const rawTime = today.toLocaleTimeString(navigator.language, {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true
+    hour12: true,
   });
 
   const [time, noon] = rawTime.split(" ");

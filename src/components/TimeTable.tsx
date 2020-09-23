@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, memo } from "react";
 import { ReactComponent as TimeIcon } from "./query.svg";
 import Box from "../system/Box";
@@ -6,36 +7,40 @@ import { Row, Column } from "../system/Flex";
 import Text, {
   HighlighedText,
   SecondaryText,
-  Capitalize
+  Capitalize,
 } from "../system/Text";
 import Heading from "../system/Heading";
 
 import {
   isNotOperating,
   printListOpenCloseTimeInPair,
-  gerReadableAria
+  gerReadableAria,
 } from "./TimeTable.model";
 import { isSameWeekDay } from "../utils/date.helper";
 import {
   TimeTableComponentProps,
   TimeTableRowComponentProps,
-  OpenCloseTime
+  OpenCloseTime,
 } from "../models";
 
 const TimeTableRow: React.FC<TimeTableRowComponentProps> = memo(
   ({ day, times }) => (
     <>
-      <Row justifyContent="space-between">
-        <Box>
+      <Row
+        justifyContent="space-between"
+        role="row"
+        data-testid={`timeTableRow-${day}`}
+      >
+        <Box role="cell">
           <Capitalize fontWeight="500">{day}</Capitalize>
           {isSameWeekDay(day) ? (
             <HighlighedText mx={2}>TODAY</HighlighedText>
           ) : null}
         </Box>
         {isNotOperating(times) ? (
-          <SecondaryText>Closed</SecondaryText>
+          <SecondaryText role="cell">Closed</SecondaryText>
         ) : (
-          <Column>
+          <Column role="cell">
             {printListOpenCloseTimeInPair(times).map((time: OpenCloseTime) => {
               return (
                 <Text textAlign="right" key={time} py="2px">
@@ -73,21 +78,15 @@ export const TimeTable: React.FC<TimeTableComponentProps> = memo(
         boxShadow="0 0 5px 5px #F8F8F8"
         m="0 auto"
         role="table"
-        aria-labelledby="timeTable__title"
       >
-        <Heading
-          level={2}
-          py="10px"
-          aria-label={`${hoursInfoAria}`}
-          id="timeTable__title"
-        >
-          <TimeIcon fill="grey" alt="Opening hours" aria-hidden />
+        <Heading level={2} py="10px" aria-label={`${hoursInfoAria}`}>
+          <TimeIcon fill="grey" aria-hidden />
           <Text fontSize={30} pl="10px">
             Opening hours
           </Text>
         </Heading>
         <Divider color="black" />
-        <Box mt={3}>
+        <Box mt={3} role="rowgroup">
           {timeTable.map(([day, times]) => {
             return <TimeTableRow key={day} day={day} times={times} />;
           })}

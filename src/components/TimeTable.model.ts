@@ -4,7 +4,7 @@ import {
   print12DigitsShortTime,
   PrintTimeFuntion,
   getToday,
-  WeekDayNumberMapping
+  WeekDayNumberMapping,
 } from "../utils/date.helper";
 import { OpenCloseTime, IWeeklyTimeTable, WeeklyTimeTableVM } from "../models";
 
@@ -60,7 +60,7 @@ export const printTime = (time: number, printTimeFn?: PrintTimeFuntion) =>
 // about open and close time
 export const transform = (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
   let res = [];
-  let temp = null;
+  let temp = [];
   // from entities to array paris
   let data = toPairs(_data);
   // rearrange the array, so that for the same day has all the close and open time
@@ -77,13 +77,16 @@ export const transform = (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
     // if current day doesn't have last close time, then move
     // next day's first close time to the current day
     if (!isCloseEndOfDay(temp[1])) {
-      temp = [temp[0], [...temp[1], nextDay[1][0]]];
+      temp = [temp[0], [...temp[1], nextDay[1][0]]] as WeeklyTimeTableVM;
     }
 
     // if current day's first item is close time, then remove
     // from the array
-    if (isCloseHeadOfDay(temp[1])) {
-      temp = [temp[0], [...temp[1].slice(1)]];
+    if (isCloseHeadOfDay(temp[1] as OpenCloseTime[])) {
+      temp = [
+        temp[0],
+        [...(temp[1].slice(1) as OpenCloseTime[])],
+      ] as WeeklyTimeTableVM;
     }
 
     res.push(temp);
@@ -96,7 +99,8 @@ export const transform = (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
 const getTodayOpeningTime = (
   timeTable: WeeklyTimeTableVM[]
 ): WeeklyTimeTableVM => {
-  const todayNum: number = getToday().getDay();
+  const todayNum = getToday().getDay();
+  // @ts-ignore
   const todayStr = WeekDayNumberMapping[`${todayNum}`];
   return timeTable.find((day) => day[0] === todayStr) as WeeklyTimeTableVM;
 };
