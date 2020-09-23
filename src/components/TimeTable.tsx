@@ -1,10 +1,14 @@
 import React, { useState, useEffect, memo } from "react";
 import { ReactComponent as TimeIcon } from "./query.svg";
-import Box from "./Box";
-import Divider from "./Divider";
-import { Row, Column } from "./Flex";
-import Text, { HighlighedText, SecondaryText, Capitalize } from "./Text";
-import Heading from "./Heading";
+import Box from "../system/Box";
+import Divider from "../system/Divider";
+import { Row, Column } from "../system/Flex";
+import Text, {
+  HighlighedText,
+  SecondaryText,
+  Capitalize
+} from "../system/Text";
+import Heading from "../system/Heading";
 
 import {
   isNotOperating,
