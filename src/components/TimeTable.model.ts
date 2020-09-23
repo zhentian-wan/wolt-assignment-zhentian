@@ -2,7 +2,9 @@ import { head, pipe, last, propEq, toPairs, map, join, groupWith } from "ramda";
 import {
   prettyTime,
   print12DigitsShortTime,
-  PrintTimeFuntion
+  PrintTimeFuntion,
+  getToday,
+  WeekDayNumberMapping
 } from "../utils/date.helper";
 import { OpenCloseTime } from "../models";
 
@@ -68,6 +70,22 @@ export const transform = (_data) => {
   }
 
   return res;
+};
+const getTodayOpeningTime = (timeTable) => {
+  const todayNum: number = getToday().getDay();
+  const todayStr = WeekDayNumberMapping[`${todayNum}`];
+  return timeTable.find((day) => day[0] === todayStr);
+};
+export const gerReadableAria = (timeTable) => {
+  const [dayName, openingHours] = getTodayOpeningTime(timeTable);
+  const base = `Opening hours for today ${dayName}:`;
+  if (isNotOperating(openingHours)) {
+    return `${base} Today is closed`;
+  }
+  const todayOpenHoursStr = `${base} ${printListOpenCloseTimeInPair(
+    openingHours
+  )}`;
+  return todayOpenHoursStr;
 };
 
 // #endregion

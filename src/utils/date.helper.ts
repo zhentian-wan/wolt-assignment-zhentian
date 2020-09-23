@@ -15,6 +15,15 @@ export enum WeekDayMapping {
   firday,
   saturday
 }
+export const WeekDayNumberMapping = {
+  0: "sunday",
+  1: "monday",
+  2: "tuseday",
+  3: "wednesday",
+  4: "thrusday",
+  5: "firday",
+  6: "saturday"
+};
 
 export const getToday = (_date?: Date) => {
   const date: Date = _date || new Date();

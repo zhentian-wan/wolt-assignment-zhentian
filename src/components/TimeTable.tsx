@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, memo } from "react";
 import { ReactComponent as TimeIcon } from "./query.svg";
 import Box from "./Box";
 import Divider from "./Divider";
@@ -8,11 +8,12 @@ import Heading from "./Heading";
 
 import {
   isNotOperating,
-  printListOpenCloseTimeInPair
+  printListOpenCloseTimeInPair,
+  gerReadableAria
 } from "./TimeTable.model";
 import { isSameWeekDay } from "../utils/date.helper";
 
-const TimeTableRow = ({ day, times }) => (
+const TimeTableRow = memo(({ day, times }) => (
   <>
     <Row justifyContent="space-between">
       <Box>
@@ -37,9 +38,19 @@ const TimeTableRow = ({ day, times }) => (
     </Row>
     <Divider opacity="0.2" />
   </>
-);
+));
 
-export default function TimeTable({ timeTable }) {
+export default memo(function TimeTable({ timeTable }) {
+  const [hoursInfoAria, setHoursInfoAria] = useState("");
+
+  useEffect(() => {
+    if (timeTable.length === 0) {
+      return;
+    }
+    const openingHoursInfo = gerReadableAria(timeTable);
+    setHoursInfoAria(openingHoursInfo);
+  }, [timeTable]);
+
   return (
     <Box
       p="25px"
@@ -52,7 +63,12 @@ export default function TimeTable({ timeTable }) {
       role="table"
       aria-labelledby="timeTable__title"
     >
-      <Heading level={2} py="10px" id="timeTable__title">
+      <Heading
+        level={2}
+        py="10px"
+        aria-label={`${hoursInfoAria}`}
+        id="timeTable__title"
+      >
         <TimeIcon fill="grey" alt="Opening hours" aria-hidden />
         <Text fontSize="30px" pl="10px">
           Opening hours
@@ -66,4 +82,4 @@ export default function TimeTable({ timeTable }) {
       </Box>
     </Box>
   );
-}
+});
