@@ -3,9 +3,10 @@ import "./styles.css";
 import TimeTable from "./components/TimeTable";
 import { transform } from "./components/TimeTable.model";
 import { getTimeTable } from "./data";
+import { WeeklyTimeTableVM } from "./models";
 
 export default function App() {
-  const [timeTable, setTimeTable] = React.useState([]);
+  const [timeTable, setTimeTable] = React.useState<WeeklyTimeTableVM[]>([]);
 
   React.useEffect(() => {
     async function loadData() {

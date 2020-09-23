@@ -6,7 +6,7 @@ import {
   getToday,
   WeekDayNumberMapping
 } from "../utils/date.helper";
-import { OpenCloseTime } from "../models";
+import { OpenCloseTime, IWeeklyTimeTable, WeeklyTimeTableVM } from "../models";
 
 // #region busniess utils
 export const isType = propEq("type");
@@ -44,7 +44,7 @@ export const printListOpenCloseTimeInPair = (times: OpenCloseTime[]) =>
   pipe(groupWithOpenCloseTimeInPair, map(printTimePeriodInPair))(times);
 export const printTime = (time: number, printTimeFn?: PrintTimeFuntion) =>
   prettyTime(time, printTimeFn || print12DigitsShortTime);
-export const transform = (_data) => {
+export const transform = (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
   let res = [];
   let temp = null;
   let data = toPairs(_data);

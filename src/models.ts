@@ -12,6 +12,7 @@ export type DayOfWeek =
   | "saturday"
   | "sunday";
 
+// data model
 export interface IWeeklyTimeTable {
   monday: OpenCloseTime[];
   tuseday: OpenCloseTime[];
@@ -22,3 +23,12 @@ export interface IWeeklyTimeTable {
   sunday: OpenCloseTime[];
   // TODO: how to optimize this with DayOfWeek
 }
+
+// view model
+export type WeeklyTimeTableVM = [string, IWeeklyTimeTable[]];
+
+export type TimeTableComponentProps = { timeTable: WeeklyTimeTableVM[] };
+export type TimeTableRowComponentProps = {
+  day: string;
+  times: OpenCloseTime[];
+};
