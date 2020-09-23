@@ -8,11 +8,10 @@ import {
 } from "../utils/date.helper";
 import { OpenCloseTime, IWeeklyTimeTable, WeeklyTimeTableVM } from "../models";
 
-// #region busniess utils
 export const isType = propEq("type");
 export const isTypeOpen = isType("open");
 export const isTypeClose = isType("close");
-export const isNotOperating = (times: OpenCloseTime[] = []) =>
+export const isNotOperating = (times: OpenCloseTime[] | []) =>
   Array.isArray(times) && times.length === 0;
 export const isCloseEndOfDay = pipe(last, isTypeClose);
 export const isCloseHeadOfDay = pipe(head, isTypeClose);
@@ -30,20 +29,23 @@ export const isCloseOnSameDay = (
   const closeOnNextDay = isCloseHeadOfDay(nextDay);
   return !closeOnNextDay;
 };
+
 export const groupWithOpenCloseTimeInPair = (day: OpenCloseTime[]): boolean =>
   groupWith(
     (a: OpenCloseTime, b: OpenCloseTime) => isTypeOpen(a) && isTypeClose(b),
     day
   );
-export const printTimePeriodInPair = (day: OpenCloseTime[]) =>
+export const printTimePeriodInPair = (times: OpenCloseTime[]) =>
   join(
     " - ",
-    map(({ value }) => printTime(value), day)
+    map((time: OpenCloseTime) => printTime(time.value), times)
   );
 export const printListOpenCloseTimeInPair = (times: OpenCloseTime[]) =>
   pipe(groupWithOpenCloseTimeInPair, map(printTimePeriodInPair))(times);
+
 export const printTime = (time: number, printTimeFn?: PrintTimeFuntion) =>
   prettyTime(time, printTimeFn || print12DigitsShortTime);
+
 export const transform = (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
   let res = [];
   let temp = null;
@@ -71,12 +73,15 @@ export const transform = (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
 
   return res;
 };
-const getTodayOpeningTime = (timeTable) => {
+
+const getTodayOpeningTime = (
+  timeTable: WeeklyTimeTableVM[]
+): WeeklyTimeTableVM => {
   const todayNum: number = getToday().getDay();
   const todayStr = WeekDayNumberMapping[`${todayNum}`];
-  return timeTable.find((day) => day[0] === todayStr);
+  return timeTable.find((day) => day[0] === todayStr) as WeeklyTimeTableVM;
 };
-export const gerReadableAria = (timeTable) => {
+export const gerReadableAria = (timeTable: WeeklyTimeTableVM[]) => {
   const [dayName, openingHours] = getTodayOpeningTime(timeTable);
   const base = `Opening hours for today ${dayName}:`;
   if (isNotOperating(openingHours)) {
@@ -87,5 +92,3 @@ export const gerReadableAria = (timeTable) => {
   )}`;
   return todayOpenHoursStr;
 };
-
-// #endregion

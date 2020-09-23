@@ -25,7 +25,7 @@ export interface IWeeklyTimeTable {
 }
 
 // view model
-export type WeeklyTimeTableVM = [string, IWeeklyTimeTable[]];
+export type WeeklyTimeTableVM = [string, OpenCloseTime[]];
 
 export type TimeTableComponentProps = { timeTable: WeeklyTimeTableVM[] };
 export type TimeTableRowComponentProps = {
