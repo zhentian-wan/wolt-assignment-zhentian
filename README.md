@@ -22,13 +22,17 @@ Then view the app on `http://localhost:3000`
 
 ### Structure of the application
 
-src/components: contain TimeTable component & its model parser functions
+Following the Domain Driven Design:
+
+Since assignment app is simple, there is only one **Smart** component: App.txs.
+
+src/components: **Domain layer.** contain TimeTable component & its model parser functions
 
 src/components/**test**: related testing
 
-src/system: Primitive component for building other component using [styled system](https://styled-system.com/)
+src/system: **UI layer.** Primitive component for building other component using [styled system](https://styled-system.com/)
 
-src/utils: Helper functions to deal with time & date
+src/utils: **Util layer.** Helper functions to deal with time & date
 
 src/models.ts: Types
 
