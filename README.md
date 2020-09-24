@@ -20,7 +20,7 @@ src/components: contain TimeTable component & its model parser functions
 
 src/components/**test**: related testing
 
-src/system: Primitive component for building other component using (styled system)[https://styled-system.com/]
+src/system: Primitive component for building other component using [styled system](https://styled-system.com/)
 
 src/utils: Helper functions to deal with time & date
 
