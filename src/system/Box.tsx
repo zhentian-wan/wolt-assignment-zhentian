@@ -8,6 +8,7 @@ import {
   grid,
   shadow,
 } from "styled-system";
+// @ts-ignore
 import propTypes from "@styled-system/prop-types";
 
 const Box = styled.div(

@@ -6,7 +6,12 @@ import {
   getToday,
   WeekDayNumberMapping,
 } from "../utils/date.helper";
-import { OpenCloseTime, IWeeklyTimeTable, WeeklyTimeTableVM } from "../models";
+import {
+  OpenCloseTime,
+  IWeeklyTimeTable,
+  WeeklyTimeTableVM,
+  weeksNumber,
+} from "../models";
 
 export const isType = propEq("type");
 export const isTypeOpen = isType("open");
@@ -98,8 +103,8 @@ export const transform = (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
 const getTodayOpeningTime = (
   timeTable: WeeklyTimeTableVM[]
 ): WeeklyTimeTableVM => {
-  const todayNum = getToday().getDay();
-  const todayStr = WeekDayNumberMapping[`${todayNum}`];
+  const todayNum = getToday().getDay() as weeksNumber;
+  const todayStr = WeekDayNumberMapping[todayNum];
   return timeTable.find((day) => day[0] === todayStr) as WeeklyTimeTableVM;
 };
 // get a readable aria-label information for screen reader

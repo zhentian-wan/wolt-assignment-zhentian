@@ -7,7 +7,7 @@ export type OpenCloseTime = {
 export interface IWeeklyTimeTable {
   [key: string]: OpenCloseTime[];
 }
-
+export type weeksNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 // view model
 export type WeeklyTimeTableVM = [string, OpenCloseTime[]];
 

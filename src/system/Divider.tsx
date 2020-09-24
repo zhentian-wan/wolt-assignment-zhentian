@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { space, color } from "styled-system";
+// @ts-ignore
 import propTypes from "@styled-system/prop-types";
 
 const Divider = styled.hr(
   {
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   },
   space,
   color
@@ -12,7 +13,7 @@ const Divider = styled.hr(
 
 Divider.propTypes = {
   ...propTypes.space,
-  ...propTypes.color
+  ...propTypes.color,
 };
 
 export default Divider;
