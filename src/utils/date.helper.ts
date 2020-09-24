@@ -12,7 +12,7 @@ const MONDAY = "monday";
 const TUSEDAY = "tuseday";
 const WEDNESDAY = "wednesday";
 const THURSDAY = "thursday";
-const FIRDAY = "firday";
+const FRIDAY = "friday";
 const SATURDAY = "saturday";
 const SUNDAY = "sunday";
 export type DayOfWeek =
@@ -20,7 +20,7 @@ export type DayOfWeek =
   | "tuseday"
   | "wednesday"
   | "thursday"
-  | "firday"
+  | "friday"
   | "saturday"
   | "sunday";
 export const WeekDayMapping = {
@@ -29,7 +29,7 @@ export const WeekDayMapping = {
   [TUSEDAY]: 2,
   [WEDNESDAY]: 3,
   [THURSDAY]: 4,
-  [FIRDAY]: 5,
+  [FRIDAY]: 5,
   [SATURDAY]: 6,
 };
 export const WeekDayNumberMapping = {
@@ -38,7 +38,7 @@ export const WeekDayNumberMapping = {
   "2": TUSEDAY,
   "3": WEDNESDAY,
   "4": THURSDAY,
-  "5": FIRDAY,
+  "5": FRIDAY,
   "6": SATURDAY,
 };
 

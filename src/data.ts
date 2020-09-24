@@ -11,7 +11,7 @@ export const defTimeTable: IWeeklyTimeTable = {
     { type: "open", value: 36000 },
     { type: "close", value: 64800 },
   ],
-  firday: [{ type: "open", value: 36000 }],
+  friday: [{ type: "open", value: 36000 }],
   saturday: [
     { type: "close", value: 3600 },
     { type: "open", value: 32400 },
