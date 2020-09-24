@@ -1,3 +1,5 @@
+import { curry } from "ramda";
+
 export type PrintTimeFuntion = (
   hour: string,
   minute: string,
@@ -65,27 +67,28 @@ export const print12DigitsShortTime = (
   return `${shortHour}${shortMinute} ${noon}`.toLocaleUpperCase();
 };
 
-export const prettyTime = (
-  second: number,
-  printTimeFn: PrintTimeFuntion = print12DigitsShortTime
-) => {
-  if (second === MIN_TIME) {
-    return printTimeFn("12", "00", "AM");
+export const prettyTime = curry(
+  (printTimeFn: PrintTimeFuntion = print12DigitsShortTime) => (
+    second: number
+  ) => {
+    if (second === MIN_TIME) {
+      return printTimeFn("12", "00", "AM");
+    }
+
+    if (second < MIN_TIME || second > MAX_TIME) {
+      return "Invalid";
+    }
+
+    const today = getToday();
+    today.setSeconds(today.getSeconds() + second);
+    const rawTime = today.toLocaleTimeString(navigator.language, {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+
+    const [time, noon] = rawTime.split(" ");
+    const [hour, minute] = time.split(":");
+    return printTimeFn(hour, minute, noon);
   }
-
-  if (second < MIN_TIME || second > MAX_TIME) {
-    return "Invalid";
-  }
-
-  const today = getToday();
-  today.setSeconds(today.getSeconds() + second);
-  const rawTime = today.toLocaleTimeString(navigator.language, {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
-
-  const [time, noon] = rawTime.split(" ");
-  const [hour, minute] = time.split(":");
-  return printTimeFn(hour, minute, noon);
-};
+);

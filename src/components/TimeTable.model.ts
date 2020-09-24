@@ -2,7 +2,6 @@ import { head, pipe, last, propEq, toPairs, map, join, groupWith } from "ramda";
 import {
   prettyTime,
   print12DigitsShortTime,
-  PrintTimeFuntion,
   getToday,
   WeekDayNumberMapping,
 } from "../utils/date.helper";
@@ -40,25 +39,23 @@ export const isCloseOnSameDay = (
   [{type: open}, {type: close}]
 ]
 */
-export const groupWithOpenCloseTimeInPair = (day: OpenCloseTime[]) =>
-  groupWith(
-    (a: OpenCloseTime, b: OpenCloseTime) => isTypeOpen(a) && isTypeClose(b),
-    day
-  );
+export const groupWithOpenCloseTimeInPair = groupWith(
+  (a: OpenCloseTime, b: OpenCloseTime) => isTypeOpen(a) && isTypeClose(b)
+);
 // print opening hours 10 AM - 1 PM
-export const printTimePeriodInPair = (times: OpenCloseTime[]) =>
-  join(
-    " - ",
-    map((time: OpenCloseTime) => printTime(time.value), times)
-  );
+export const printTimePeriodInPair = pipe(
+  map((time: OpenCloseTime) => printTime(time.value)),
+  join(" - ")
+);
 // print a list of opening hours
 // 10 AM - 1 PM, 2 PM - 8 PM
-export const printListOpenCloseTimeInPair = (times: OpenCloseTime[]) =>
-  pipe(groupWithOpenCloseTimeInPair, map(printTimePeriodInPair))(times);
+export const printListOpenCloseTimeInPair = pipe(
+  groupWithOpenCloseTimeInPair,
+  map(printTimePeriodInPair)
+);
 
 // print time: "10 AM" using short 2 digits format
-export const printTime = (time: number, printTimeFn?: PrintTimeFuntion) =>
-  prettyTime(time, printTimeFn || print12DigitsShortTime);
+export const printTime = prettyTime(print12DigitsShortTime);
 
 // transform the data from entities to array
 // rearrange the data so that for the same day, it has all the information
