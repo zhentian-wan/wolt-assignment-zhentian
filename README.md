@@ -24,7 +24,7 @@ Then view the app on `http://localhost:3000`
 
 Following the Domain Driven Design:
 
-Since assignment app is simple, there is only one **Smart** component: App.txs.
+Since assignment app is simple, there is only one **Smart** component: App.tsx.
 
 src/components: **Domain layer.** contain TimeTable component & its model parser functions
 
