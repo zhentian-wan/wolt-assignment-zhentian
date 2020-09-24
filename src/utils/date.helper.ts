@@ -6,31 +6,38 @@ export type PrintTimeFuntion = (
 
 const MIN_TIME = 0;
 const MAX_TIME = 86399;
+const MONDAY = "monday";
+const TUSEDAY = "tuseday";
+const WEDNESDAY = "wednesday";
+const THURSDAY = "thursday";
+const FIRDAY = "firday";
+const SATURDAY = "saturday";
+const SUNDAY = "sunday";
 export type DayOfWeek =
   | "monday"
   | "tuseday"
   | "wednesday"
-  | "thrusday"
+  | "thursday"
   | "firday"
   | "saturday"
   | "sunday";
 export const WeekDayMapping = {
-  sunday: 0,
-  monday: 1,
-  tuseday: 2,
-  wednesday: 3,
-  thrusday: 4,
-  firday: 5,
-  saturday: 6,
+  [SUNDAY]: 0,
+  [MONDAY]: 1,
+  [TUSEDAY]: 2,
+  [WEDNESDAY]: 3,
+  [THURSDAY]: 4,
+  [FIRDAY]: 5,
+  [SATURDAY]: 6,
 };
 export const WeekDayNumberMapping = {
-  "0": "sunday",
-  "1": "monday",
-  "2": "tuseday",
-  "3": "wednesday",
-  "4": "thrusday",
-  "5": "firday",
-  "6": "saturday",
+  "0": SUNDAY,
+  "1": MONDAY,
+  "2": TUSEDAY,
+  "3": WEDNESDAY,
+  "4": THURSDAY,
+  "5": FIRDAY,
+  "6": SATURDAY,
 };
 
 export const getToday = (_date?: Date) => {

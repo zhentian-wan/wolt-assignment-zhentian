@@ -5,13 +5,6 @@ export type OpenCloseTime = {
 
 // data model
 export interface IWeeklyTimeTable {
-  /*monday: OpenCloseTime[];
-  tuseday: OpenCloseTime[];
-  wednesday: OpenCloseTime[];
-  thursday: OpenCloseTime[];
-  friday: OpenCloseTime[];
-  saturday: OpenCloseTime[];
-  sunday: OpenCloseTime[];*/
   [key: string]: OpenCloseTime[];
 }
 

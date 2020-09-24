@@ -100,7 +100,6 @@ const getTodayOpeningTime = (
   timeTable: WeeklyTimeTableVM[]
 ): WeeklyTimeTableVM => {
   const todayNum = getToday().getDay();
-  // @ts-ignore
   const todayStr = WeekDayNumberMapping[`${todayNum}`];
   return timeTable.find((day) => day[0] === todayStr) as WeeklyTimeTableVM;
 };
