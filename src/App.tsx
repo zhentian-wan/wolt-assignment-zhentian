@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import TimeTable from "./components/TimeTable";
 import { transform } from "./components/TimeTable.model";
@@ -6,9 +6,9 @@ import { getTimeTable } from "./data";
 import { WeeklyTimeTableVM } from "./models";
 
 export default function App() {
-  const [timeTable, setTimeTable] = React.useState<WeeklyTimeTableVM[]>([]);
+  const [timeTable, setTimeTable] = useState<WeeklyTimeTableVM[]>([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function loadData() {
       const rawData = await getTimeTable();
       const formattedData = transform(rawData);

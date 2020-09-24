@@ -11,6 +11,7 @@ import {
   WeeklyTimeTableVM,
   weeksNumber,
 } from "../models";
+import memoize from "../utils/memoize";
 
 export const isType = propEq("type");
 export const isTypeOpen = isType("open");
@@ -60,41 +61,43 @@ export const printTime = prettyTime(print12DigitsShortTime);
 // transform the data from entities to array
 // rearrange the data so that for the same day, it has all the information
 // about open and close time
-export const transform = (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
-  let res = [];
-  let temp = [];
-  // from entities to array paris
-  let data = toPairs(_data);
-  // rearrange the array, so that for the same day has all the close and open time
-  for (let i = 0; i < data.length; i++) {
-    temp = data[i]; // temp: ['monday', [{}, {}]]
-    const nextDay = data[(i + 1) % 7];
+export const transform = memoize(
+  (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
+    let res = [];
+    let temp = [];
+    // from entities to array paris
+    let data = toPairs(_data);
+    // rearrange the array, so that for the same day has all the close and open time
+    for (let i = 0; i < data.length; i++) {
+      temp = data[i]; // temp: ['monday', [{}, {}]]
+      const nextDay = data[(i + 1) % 7];
 
-    if (isNotOperating(temp[1])) {
+      if (isNotOperating(temp[1])) {
+        res.push(temp);
+        continue;
+      }
+
+      // if current day doesn't have last close time, then move
+      // next day's first close time to the current day
+      if (!isCloseEndOfDay(temp[1])) {
+        temp = [temp[0], [...temp[1], nextDay[1][0]]] as WeeklyTimeTableVM;
+      }
+
+      // if current day's first item is close time, then remove
+      // from the array
+      if (isCloseHeadOfDay(temp[1] as OpenCloseTime[])) {
+        temp = [
+          temp[0],
+          [...(temp[1].slice(1) as OpenCloseTime[])],
+        ] as WeeklyTimeTableVM;
+      }
+
       res.push(temp);
-      continue;
     }
 
-    // if current day doesn't have last close time, then move
-    // next day's first close time to the current day
-    if (!isCloseEndOfDay(temp[1])) {
-      temp = [temp[0], [...temp[1], nextDay[1][0]]] as WeeklyTimeTableVM;
-    }
-
-    // if current day's first item is close time, then remove
-    // from the array
-    if (isCloseHeadOfDay(temp[1] as OpenCloseTime[])) {
-      temp = [
-        temp[0],
-        [...(temp[1].slice(1) as OpenCloseTime[])],
-      ] as WeeklyTimeTableVM;
-    }
-
-    res.push(temp);
+    return res;
   }
-
-  return res;
-};
+);
 
 // get today's opening hours
 const getTodayOpeningTime = (
@@ -105,7 +108,7 @@ const getTodayOpeningTime = (
   return timeTable.find((day) => day[0] === todayStr) as WeeklyTimeTableVM;
 };
 // get a readable aria-label information for screen reader
-export const gerReadableAria = (timeTable: WeeklyTimeTableVM[]) => {
+export const gerReadableAria = memoize((timeTable: WeeklyTimeTableVM[]) => {
   const [dayName, openingHours] = getTodayOpeningTime(timeTable);
   // if today is not operating
   const base = `Opening hours for today ${dayName}:`;
@@ -117,4 +120,4 @@ export const gerReadableAria = (timeTable: WeeklyTimeTableVM[]) => {
     openingHours
   )}`;
   return todayOpenHoursStr;
-};
+});
