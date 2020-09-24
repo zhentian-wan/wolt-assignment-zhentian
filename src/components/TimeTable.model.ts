@@ -65,8 +65,7 @@ export const transform = (_data: IWeeklyTimeTable): WeeklyTimeTableVM[] => {
   let data = toPairs(_data);
   // rearrange the array, so that for the same day has all the close and open time
   for (let i = 0; i < data.length; i++) {
-    const today = data[i];
-    temp = today;
+    temp = data[i]; // temp: ['monday', [{}, {}]]
     const nextDay = data[(i + 1) % 7];
 
     if (isNotOperating(temp[1])) {
