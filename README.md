@@ -1,5 +1,11 @@
 # wolt-assignment-zhentian
 
+## Quick access from [Codesandbox](https://codesandbox.io/s/github/zhentian-wan/wolt-assignment-zhentian)
+
+or
+
+## Run locally
+
 ### Install
 
 `npm install` or `yarn install`
