@@ -8,13 +8,15 @@ export type PrintTimeFuntion = (
 
 const MIN_TIME = 0;
 const MAX_TIME = 86399;
-const MONDAY = "monday";
-const TUSEDAY = "tuseday";
-const WEDNESDAY = "wednesday";
-const THURSDAY = "thursday";
-const FRIDAY = "friday";
-const SATURDAY = "saturday";
-const SUNDAY = "sunday";
+export enum WeekDayEnum {
+  sunday = 0,
+  monday,
+  tuseday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+}
 export type DayOfWeek =
   | "monday"
   | "tuseday"
@@ -23,24 +25,6 @@ export type DayOfWeek =
   | "friday"
   | "saturday"
   | "sunday";
-export const WeekDayMapping = {
-  [SUNDAY]: 0,
-  [MONDAY]: 1,
-  [TUSEDAY]: 2,
-  [WEDNESDAY]: 3,
-  [THURSDAY]: 4,
-  [FRIDAY]: 5,
-  [SATURDAY]: 6,
-};
-export const WeekDayNumberMapping = {
-  "0": SUNDAY,
-  "1": MONDAY,
-  "2": TUSEDAY,
-  "3": WEDNESDAY,
-  "4": THURSDAY,
-  "5": FRIDAY,
-  "6": SATURDAY,
-};
 
 export const getToday = (_date?: Date) => {
   const date: Date = _date || new Date();
@@ -51,7 +35,7 @@ export const getToday = (_date?: Date) => {
 };
 export const isSameWeekDay = (day: DayOfWeek, _date?: Date) => {
   const today = getToday(_date).getDay();
-  return WeekDayMapping[day] === today;
+  return WeekDayEnum[today] === day;
 };
 export const print12DigitsShortTime = (
   hour: string,

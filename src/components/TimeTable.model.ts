@@ -3,7 +3,7 @@ import {
   prettyTime,
   print12DigitsShortTime,
   getToday,
-  WeekDayNumberMapping,
+  WeekDayEnum,
 } from "../utils/date.helper";
 import {
   OpenCloseTime,
@@ -104,7 +104,7 @@ const getTodayOpeningTime = (
   timeTable: WeeklyTimeTableVM[]
 ): WeeklyTimeTableVM => {
   const todayNum = getToday().getDay() as weeksNumber;
-  const todayStr = WeekDayNumberMapping[todayNum];
+  const todayStr = WeekDayEnum[todayNum];
   return timeTable.find((day) => day[0] === todayStr) as WeeklyTimeTableVM;
 };
 // get a readable aria-label information for screen reader
