@@ -55,6 +55,7 @@ const TimeTableRow: React.FC<TimeTableRowComponentProps> = memo(
     </>
   )
 );
+TimeTableRow.displayName = "TimeTableRow";
 
 export const TimeTable: React.FC<TimeTableComponentProps> = memo(
   ({ timeTable }) => {
@@ -95,5 +96,7 @@ export const TimeTable: React.FC<TimeTableComponentProps> = memo(
     );
   }
 );
+
+TimeTable.displayName = "TimeTable";
 
 export default TimeTable;

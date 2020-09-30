@@ -18,6 +18,7 @@ const Text = styled.span(
 Text.propTypes = {
   children: PropTypes.node,
 };
+Text.displayName = "Text";
 
 export const HighlighedText = styled(Text)({
   color: ({ theme }) => theme.colors.green,
@@ -28,7 +29,7 @@ export const HighlighedText = styled(Text)({
 HighlighedText.propTypes = {
   children: PropTypes.node,
 };
-
+HighlighedText.displayName = "HighlighedText";
 export const SecondaryText = styled(Text)({
   color: ({ theme }) => theme.colors.grey3,
 });
@@ -36,6 +37,7 @@ export const SecondaryText = styled(Text)({
 SecondaryText.propTypes = {
   children: PropTypes.node,
 };
+SecondaryText.displayName = "SecondaryText";
 
 export const Capitalize = styled(Text)({
   textTransform: "capitalize",
@@ -44,5 +46,5 @@ export const Capitalize = styled(Text)({
 Capitalize.propTypes = {
   children: PropTypes.node,
 };
-
+Capitalize.displayName = "Capitalize";
 export default Text;

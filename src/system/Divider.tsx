@@ -16,4 +16,6 @@ Divider.propTypes = {
   ...propTypes.color,
 };
 
+Divider.displayName = "Divider";
+
 export default Divider;

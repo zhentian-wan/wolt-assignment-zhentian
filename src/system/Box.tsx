@@ -34,4 +34,6 @@ Box.propTypes = {
   ...propTypes.grid,
 };
 
+Box.displayName = "Box";
+
 export default Box;

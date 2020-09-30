@@ -25,5 +25,5 @@ Heading.propTypes = {
   level: PropTypes.oneOf([1, 2, 3]).isRequired,
   children: PropTypes.node,
 };
-
+Heading.displayName = `Heading`;
 export default Heading;
